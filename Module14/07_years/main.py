@@ -2,7 +2,7 @@ print()
 a = int(input('Введите первый год: '))
 b = int(input('Введите второй год: '))
 
-for i in range(a, b):
+for i in range(a, b + 1):
     year = i
     dig1 =  i // 1000
     dig2 =  i // 100 - dig1 * 10
