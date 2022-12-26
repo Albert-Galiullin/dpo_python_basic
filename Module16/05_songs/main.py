@@ -9,5 +9,18 @@ violator_songs = [
     ['Blue Dress', 4.29],
     ['Clean', 5.83]
 ]
+print(violator_songs)
+some_songs = []
+amount = int(input('Сколько песен выбрать? '))
+time = 0
+for i in range(amount):
+    print('Название',  str(i + 1)+'-й песни: ', end = '')
+    song = input()
+    for i in range(len(violator_songs)):
+       if song == violator_songs[i][0]:
+            time += violator_songs[i][1]
+            some_songs.append(song)
+        # else:
+        #     print('Такой песни не найдено')
 
-# TODO здесь писать код
+print('Общее время звучания песен: ', time, ' минут')
