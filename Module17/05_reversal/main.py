@@ -15,4 +15,4 @@ text2 = []
 for i in range(index2 - index1):
     text2.append(text[i])
 
-print('Развёрнутая последовательность между первым и последним h: ', text2[index2: index1: -1])
+print('Развёрнутая последовательность между первым и последним h: ', ''.join(text2[index2: index1: -1]))
