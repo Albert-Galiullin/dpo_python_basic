@@ -11,7 +11,7 @@ password = input('Придумайте пароль: ')
 a = sum(i.isupper() for i in password)
 b = sum(i.isdigit() for i in password)
 while True:
-    if a > 0 and b > 2:
+    if a > 0 and b > 2 and len(password) > 7:
         print(' Это надёжный пароль!')
         break
     else:
