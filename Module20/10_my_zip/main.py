@@ -10,11 +10,10 @@
 # ('d', 40)
 
 def my_zip(a1, b1):
-    a_dict = {}
-    if len(a1) >= len(b1):
-        l_c = len(b1)
-    else:
-        l_c = len(a1)
+    a_dict = []
+    l_c = min(len(a1), len(b1))
+      
+    
     for i in range(l_c):
         a_dict[a1[i]] = b1[i]
     return a_dict
