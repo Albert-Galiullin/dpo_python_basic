@@ -14,7 +14,7 @@ site['html'] = {
 
 def deepc(site):
     for _ in range(ques):
-        product = input('Введите название продукта для нового сайта: ').lower()
+        product = input('Введите название продукта для нового сайта: ')
         print(f'Сайт для {product}:')
         site_copy = copy.deepcopy(site)
         site_copy['html']['head']['title'] = f'Куплю/продам {product} недорого'
