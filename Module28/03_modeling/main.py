@@ -1,78 +1,77 @@
-import math
+from abc import ABC
+
+
+class Figure():
+    """
+    Абстрактный базовый класс фигура
+
+    Args and attrs:
+        length (int): длина фигуры
+        width (int): ширина(высота) фигуры
+    """
+    def __init__(self,length: int, width: int) -> None:
+        self.length = length
+        self.width = width
+
+class ResizableMixin:
+
+    def square(self, length: int, width: int) -> None:
+        self.length = length
+        self.width = width
+
+    def area(self):
+        return self.length * self.width
+
+class SurfaceAreaMixin:
+    """Клас-миксин для нахождения площади поверхности 3D фигуры"""
+
+    def __init__(self):
+        self.surface = None
+
+    def surface_area(self) -> int:
+        surface_area = 0
+        for surface in self.surfaces:
+            # print(surface_area(self))
+            surface_area += surface.area(self)
+
+        return surface_area
+
+
+class Rectangle(Figure, ResizableMixin):
+    """Прямоугольник. Родительский класс: Figure"""
+
+class Square(Figure, ResizableMixin):
+    """Квадрат. Родительский класс: Figure"""
+    def __init__(self,length: int, height=None) -> None:
+        super().__init__(length, length)
 
 
 
-class Square:
-    """Класс Квадрат"""
-    def __init__(self, le: int) -> int:
-        self.figure_name = "Квадрат"
-        self.le = le
+class  Triangle(Figure, ResizableMixin):
+    """Треугольник. Родительский класс: Figure"""
+    def __init__(self, length: int, height: int) -> None:
+        super().__init__(length, height * 0.5)
 
-    @property
-    def square(self) -> float:
-        return self.le ** 2
-
-    @property
-    def perimeter(self) -> float:
-        return 4 * self.le
-
-
-class Triangle:
-    """Класс Треугольник"""
-    def __init__(self, le: int, h: int) ->int:
-        self.figure_name = "Треугольник"
-        self.le = le
-        self.h = h
-
-    @property
-    def square(self) -> float:
-        return 0.5 * self.le * self.h
-
-    @property
-    def perimeter(self) -> float:
-        return 2 * math.sqrt(self.h ** 2 + (self.le / 2) ** 2) + self.le
-
-
-class Cube(Square):
+class Cube(Square, SurfaceAreaMixin):
     """ Класс Куб"""
-    def __init__(self, le: int) ->int:
-        super().__init__(le)
-        self.figure_name = 'Куб'
+    def __init__(self, length: int):
+        super().__init__(length=length)
+        self.surfaces = [Square, Square, Square, Square, Square, Square]
 
-    @property
-    def square(self) -> float:
-        return 6 * super().square
-
-    @property
-    def perimeter(self) ->int:
-        return 3 * super().perimeter
-
-
-class Pyramid(Triangle, Square):
+class Piramid(Square, Triangle, SurfaceAreaMixin):
     """ Класс Пирамида"""
-    def __init__(self, le: int, h: int) -> int:
-        super().__init__(le, h)
-        self.figure_name = 'Пирамида'
-
-    @property
-    def square(self) -> int:
-        side_square = 4 * super().square
-        base_square = self.le ** 2
-        return side_square + base_square
-
-    @property
-    def perimeter(self) -> int:
-        return 2 * super().perimeter + 2 * self.le
+    def __init__(self, length: int, height: int) -> None:
+        super().__init__(length=length, height=height)
+        self.surfaces = [Square, Triangle, Triangle, Triangle, Triangle]
 
 
-m = Square(2)
-print(m.square)
-print(m.perimeter)
-
-p = Pyramid(6, 4)
-print(p.square)
-print(p.perimeter)
-
-p = Cube(5)
-print(p.square)
-print(p.perimeter)
+rect_1 = Rectangle(length=5, width=6)
+rect_2 = Square(length=7)
+rect_3 = Triangle(length=5, height=6)
+rect_4 = Cube(length=7)
+# rect_5 = Piramid(length=5, height=6)
+print(rect_1.area())
+print(rect_2.area())
+print(rect_3.area())
+print(rect_4.surface_area())
+# print(rect_5.surface_area())
